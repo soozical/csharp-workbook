@@ -15,9 +15,9 @@ namespace week1_practice
             Thread.Sleep(1000);
             personalInfo();
             Thread.Sleep(1000);
-            //numConversion();
+            numConversion();
             Thread.Sleep(1000);
-            mathProbs();
+            //mathProbs();
         }
         static void addition()
         {
@@ -71,13 +71,12 @@ namespace week1_practice
 
 
         }   
-        /*static void numConversion()
+        static void numConversion()
         {
             var num = 3;
             int myInt = int.Parse(num);
             Console.WriteLine(myInt.GetType());
-
-        }*/
+        }
 
         static void mathProbs()
         {
