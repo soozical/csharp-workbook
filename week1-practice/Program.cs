@@ -17,7 +17,7 @@ namespace week1_practice
             Thread.Sleep(1000);
             numConversion();
             Thread.Sleep(1000);
-            //mathProbs();
+            mathProbs();
         }
         static void addition()
         {
@@ -66,16 +66,19 @@ namespace week1_practice
             string favoriteBand  = "Elohim";
             string favoriteSports  = "Astros";
             Console.WriteLine("Hi, my name is {0}{1}.", firstName, " ", lastName);
+            Console.WriteLine("I'm {0} years old.", age);
             Console.WriteLine("I don't particularly like sports but I guess my favorite team is the {0}.", favoriteSports);
+            Console.WriteLine("My favorite band right now is {0}.", favoriteBand);
+
 
 
 
         }   
         static void numConversion()
         {
-            var num = 3;
-            int myInt = int.Parse(num);
-            Console.WriteLine(myInt.GetType());
+            decimal num = 3.0M;
+            int intNum = (int) num;
+            Console.WriteLine(intNum.GetType());
         }
 
         static void mathProbs()
