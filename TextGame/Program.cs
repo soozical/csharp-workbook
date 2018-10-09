@@ -50,15 +50,15 @@ namespace TextGame
                         Thread.Sleep(2000);
                         Random fdmg1 = new Random(); 
                         Random edmg1 = new Random();
-                        int fdmg2 = fdmg1.Next(3, 10);
-                        int edmg2 = edmg1.Next(1, 5);
+                        int fdmg2 = fdmg1.Next(3, 11);
+                        int edmg2 = edmg1.Next(1, 6);
                         Console.WriteLine("you hit a {0}.", fdmg2);
                         Console.WriteLine("the spider hits a {0}", edmg1);
                         Thread.Sleep(2000);
                         if(edmg2 > fdmg2)
                         {
                             Console.WriteLine("The spider has dealt more damage than you!");
-                           
+                        
                         }
                         if(fdmg2 < 5){
                             Console.WriteLine("You didn't do enough damage to kill the spider, but you manage to escape");
@@ -70,7 +70,7 @@ namespace TextGame
                             Console.WriteLine("You killed the spider!");
 
                         }
-                                     
+                                 
                         
                     }
                     else
@@ -85,8 +85,8 @@ namespace TextGame
                         Thread.Sleep(2000);
                         Random fdmg1 = new Random(); 
                         Random edmg1 = new Random();
-                        int fdmg2 = fdmg1.Next(1, 8);
-                        int edmg2 = edmg1.Next(1, 5);
+                        int fdmg2 = fdmg1.Next(1, 9);
+                        int edmg2 = edmg1.Next(1, 6);
                         Console.WriteLine("you hit a {0}.", fdmg2);
                         Console.WriteLine("the spider hits a {0}", edmg2);
                         Thread.Sleep(2000);
