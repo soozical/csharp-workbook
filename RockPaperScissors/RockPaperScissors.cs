@@ -6,37 +6,37 @@ namespace RockPaperScissors
     {
         public static void Main()
         {
-            
+            //string hand2 ="";
             Console.WriteLine("Enter hand 1:");
             string hand1 = Console.ReadLine();
             Console.WriteLine("Choosing hand 2...");
-            computerChoice();
+            ComputerChoice();
             
-            //string hand2 = Console.ReadLine();
+            string hand2 = ComputerChoice();
             Console.WriteLine(CompareHands(hand1, hand2));
 
             // leave this command at the end so your program does not close automatically
             Console.ReadLine();
         }
         
-        public static string computerChoice(){
+        public static string ComputerChoice(){
             string hand2 = "";
             Random r = new Random();
-            int hand2Choice = r.Next();
+            int hand2Choice = r.Next(0, 2);
 
             if(hand2Choice == 0)
             {
-                hand2 = "rock";
+                return "rock";
             }
             if (hand2Choice == 1)
             {
-                hand2 = "paper";
+                return "paper";
             }
             if(hand2Choice == 2)
             {
-                hand2 = "scissors";
+                return "scissors";
             }
-            return hand2;
+            else return "That was not a valid response.";
         }
 
         public static string CompareHands(string hand1, string hand2)
