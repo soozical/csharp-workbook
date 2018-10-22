@@ -6,16 +6,39 @@ namespace RockPaperScissors
     {
         public static void Main()
         {
+            
             Console.WriteLine("Enter hand 1:");
-            string hand1 = Console.ReadLine().ToLower();
-            Console.WriteLine("Enter hand 2:");
-            string hand2 = Console.ReadLine().ToLower();
+            string hand1 = Console.ReadLine();
+            Console.WriteLine("Choosing hand 2...");
+            computerChoice();
+            
+            //string hand2 = Console.ReadLine();
             Console.WriteLine(CompareHands(hand1, hand2));
 
             // leave this command at the end so your program does not close automatically
             Console.ReadLine();
         }
         
+        public static string computerChoice(){
+            string hand2 = "";
+            Random r = new Random();
+            int hand2Choice = r.Next();
+
+            if(hand2Choice == 0)
+            {
+                hand2 = "rock";
+            }
+            if (hand2Choice == 1)
+            {
+                hand2 = "paper";
+            }
+            if(hand2Choice == 2)
+            {
+                hand2 = "scissors";
+            }
+            return hand2;
+        }
+
         public static string CompareHands(string hand1, string hand2)
         {
             //Tie branch
