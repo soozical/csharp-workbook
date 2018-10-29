@@ -6,16 +6,19 @@ namespace RockPaperScissors
     {
         public static void Main()
         {
-            //string hand2 ="";
-            Console.WriteLine("Enter hand 1:");
-                string hand1 = Console.ReadLine();
+            bool validInput = false;
+            string hand1 = null;
+            while(hand == null){
+            try
+            {
+                Console.WriteLine("Enter hand 1:");
+                hand1 = Console.ReadLine();
                 Console.WriteLine("Choosing hand 2...");
                 ComputerChoice();
 
                 string hand2 = ComputerChoice();
-            try
-            {
                 Console.WriteLine(CompareHands(hand1, hand2));
+                validInput = true;
             }
             catch
             {
@@ -23,6 +26,7 @@ namespace RockPaperScissors
                 Console.WriteLine("There was a problem with your entry. Choosing your hand for you.");
                 string hand3 = HumanChoice();
                 Console.WriteLine(CompareHands(hand3, hand2));
+            }
             }
             // leave this command at the end so your program does not close automatically
             Console.ReadLine();
