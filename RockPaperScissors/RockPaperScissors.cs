@@ -8,33 +8,59 @@ namespace RockPaperScissors
         {
             bool validInput = false;
             string hand1 = null;
-            while(hand == null){
-            try
-            {
-                Console.WriteLine("Enter hand 1:");
-                hand1 = Console.ReadLine();
-                Console.WriteLine("Choosing hand 2...");
-                ComputerChoice();
+            string hand2 = ComputerChoice();
 
-                string hand2 = ComputerChoice();
-                Console.WriteLine(CompareHands(hand1, hand2));
-                validInput = true;
-            }
-            catch
+
+
+            while (hand1 == null)
             {
-                string handComputer = "";
-                Console.WriteLine("There was a problem with your entry. Choosing your hand for you.");
-                string hand3 = HumanChoice();
-                Console.WriteLine(CompareHands(hand3, hand2));
+                try
+                {
+                    GetInput(hand1);
+                    validInput = true;
+                }
+                catch
+                {
+                    Console.WriteLine("There was a problem with your entry. Choosing your hand for you.");
+                    string hand3 = HumanChoice();
+                    Console.WriteLine(CompareHands(hand3, hand2));
+                    validInput = false;
+                }
+                
+                    ComputerChoice();
+                    Console.WriteLine(CompareHands(hand1, hand2));
+                
+
+
             }
+            
+        }
+
+        public static string GetInput(string hand1)
+        {
+            Console.WriteLine("Enter hand 1:");
+            hand1 = Console.ReadLine();
+            if (hand1 == "rock" || hand1 == "paper" || hand1 == "scissors")
+            {
+                Console.WriteLine("Choosing hand 2...");
+                string hand2 = ComputerChoice();
+                return hand2;
+
             }
-            // leave this command at the end so your program does not close automatically
-            Console.ReadLine();
+            else
+            {
+                
+                hand1 = null;
+                throw new Exception("Invalid Input");
+                return hand1;
+            }
+
+           
+
         }
 
         public static string ComputerChoice()
         {
-            
             Random r = new Random();
             int hand2Choice = r.Next(0, 2);
 
@@ -59,6 +85,7 @@ namespace RockPaperScissors
 
         public static string CompareHands(string hand1, string hand2)
         {
+
 
             //Tie branch
             if (hand1 == hand2)
@@ -108,7 +135,6 @@ namespace RockPaperScissors
 
             return hand1 + ' ' + hand2;
         }
-
         public static string HumanChoice()
         {
 
@@ -131,6 +157,7 @@ namespace RockPaperScissors
             {
                 throw new Exception("Bad Human Choice");
             }
+
         }
     }
 }
