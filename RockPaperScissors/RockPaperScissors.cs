@@ -6,7 +6,6 @@ namespace RockPaperScissors
     {
         public static void Main()
         {
-            GetInput();
             string hand1 = GetInput();
             string hand2 = AutomatedChoice();
             CompareHands(hand1, hand2);
@@ -29,12 +28,12 @@ namespace RockPaperScissors
                 {
                     Console.WriteLine("There was a problem with your input.");
                     Console.WriteLine("Picking a hand for you...");
-                    string hand3 = ComputerChoice();
-                    return hand3;
+                    string hand3 = AutomatedChoice();
 
                 }
             Console.WriteLine("Choosing hand 2...");
                 string hand2 = AutomatedChoice();
+                Console.WriteLine("You chose {0} and I chose {1}.", hand1, hand2);
                 CompareHands(hand1, hand2);
         }
 
