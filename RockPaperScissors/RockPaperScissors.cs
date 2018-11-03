@@ -7,10 +7,11 @@ namespace RockPaperScissors
         public static void Main()
         {
             string hand1 = GetInput();
-            string hand2 = AutomatedChoice();
+            string hand2 = ComputerChoice();
             CompareHands(hand1, hand2);
+            Console.ReadLine();
         }
-
+        //Getting input from the User and validating it.
         public static string GetInput()
         {
             bool valid = false;
@@ -18,25 +19,37 @@ namespace RockPaperScissors
 
             Console.WriteLine("Enter hand 1:");
             hand1 = Console.ReadLine();
-            
+                //Input validation
                 try
                 {
                     ValidateHand(hand1);
-                    return hand1;
+                    valid = true;
                 }
+                
                 catch
                 {
+                    //Automatic hand choosing if the player doesn't enter a valid entry
                     Console.WriteLine("There was a problem with your input.");
                     Console.WriteLine("Picking a hand for you...");
-                    string hand3 = AutomatedChoice();
 
                 }
-            Console.WriteLine("Choosing hand 2...");
-                string hand2 = AutomatedChoice();
-                Console.WriteLine("You chose {0} and I chose {1}.", hand1, hand2);
-                CompareHands(hand1, hand2);
+              if (valid == true)
+              {
+                Console.WriteLine("Choosing hand 2...");
+                return hand1;
+
+              } else
+              {
+                  string hand2 = ComputerChoice();
+                  return hand2;
+              }
+                
+            
+
         }
 
+
+        //hand validation with exception
         public static string ValidateHand(string hand)
         {
             if (hand == "rock" || hand == "paper" || hand == "scissors")
@@ -48,7 +61,8 @@ namespace RockPaperScissors
                 throw new Exception("invalid input");
             }
         }
-
+        // Random hand2 choice by computer
+        // this also is where the choice for the player is made (if input is invalid)
         public static string ComputerChoice()
         {
             Random r = new Random();
@@ -74,33 +88,11 @@ namespace RockPaperScissors
             }
 
         }
-        public static string AutomatedChoice()
-        {
-            Random r = new Random();
-            int hand2Choice = r.Next(0, 2);
-
-            if (hand2Choice == 0)
-            {
-                return "rock";
-            }
-            if (hand2Choice == 1)
-            {
-                return "paper";
-            }
-            if (hand2Choice == 2)
-            {
-                return "scissors";
-            }
-            else
-            {
-                throw new Exception("Bad Computer Choice");
-            }
-
-        }
-
+        
+        //meat of the game. Where we get to hand comparison
         public static string CompareHands(string hand1, string hand2)
         {
-
+            Console.WriteLine("You chose {0} and I chose {1}.", hand1, hand2);
             //Tie branch
             if (hand1 == hand2)
             {
