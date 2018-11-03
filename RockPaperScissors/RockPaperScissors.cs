@@ -6,60 +6,76 @@ namespace RockPaperScissors
     {
         public static void Main()
         {
-            bool validInput = false;
+            GetInput();
+            string hand1 = GetInput();
+            string hand2 = AutomatedChoice();
+            CompareHands(hand1, hand2);
+        }
+
+        public static string GetInput()
+        {
+            bool valid = false;
             string hand1 = null;
-            string hand2 = ComputerChoice();
 
-
-
-            while (hand1 == null)
-            {
+            Console.WriteLine("Enter hand 1:");
+            hand1 = Console.ReadLine();
+            
                 try
                 {
-                    GetInput(hand1);
-                    validInput = true;
+                    ValidateHand(hand1);
+                    return hand1;
                 }
                 catch
                 {
-                    Console.WriteLine("There was a problem with your entry. Choosing your hand for you.");
-                    string hand3 = HumanChoice();
-                    Console.WriteLine(CompareHands(hand3, hand2));
-                    validInput = false;
+                    Console.WriteLine("There was a problem with your input.");
+                    Console.WriteLine("Picking a hand for you...");
+                    string hand3 = ComputerChoice();
+                    return hand3;
+
                 }
-                
-                    ComputerChoice();
-                    Console.WriteLine(CompareHands(hand1, hand2));
-                
-
-
-            }
-            
+            Console.WriteLine("Choosing hand 2...");
+                string hand2 = AutomatedChoice();
+                CompareHands(hand1, hand2);
         }
 
-        public static string GetInput(string hand1)
+        public static string ValidateHand(string hand)
         {
-            Console.WriteLine("Enter hand 1:");
-            hand1 = Console.ReadLine();
-            if (hand1 == "rock" || hand1 == "paper" || hand1 == "scissors")
+            if (hand == "rock" || hand == "paper" || hand == "scissors")
             {
-                Console.WriteLine("Choosing hand 2...");
-                string hand2 = ComputerChoice();
-                return hand2;
-
+                return hand;
             }
             else
             {
-                
-                hand1 = null;
-                throw new Exception("Invalid Input");
-                return hand1;
+                throw new Exception("invalid input");
             }
-
-           
-
         }
 
         public static string ComputerChoice()
+        {
+            Random r = new Random();
+            int hand2Choice = r.Next(0, 2);
+
+            if (hand2Choice == 0)
+            {
+                return "rock";
+            }
+            if (hand2Choice == 1)
+            {
+                return "paper";
+            }
+            if (hand2Choice == 2)
+            {
+                return "scissors";
+            }
+
+            else
+            {
+
+                throw new Exception("Bad computer choice");
+            }
+
+        }
+        public static string AutomatedChoice()
         {
             Random r = new Random();
             int hand2Choice = r.Next(0, 2);
@@ -85,7 +101,6 @@ namespace RockPaperScissors
 
         public static string CompareHands(string hand1, string hand2)
         {
-
 
             //Tie branch
             if (hand1 == hand2)
@@ -128,36 +143,10 @@ namespace RockPaperScissors
                     Console.WriteLine("Hand two wins!");
                 }
             }
-            else
-            {
-                throw new Exception("Invalid Entry");
-            }
 
             return hand1 + ' ' + hand2;
         }
-        public static string HumanChoice()
-        {
 
-            Random r = new Random();
-            int hand1Choice = r.Next(0, 2);
-
-            if (hand1Choice == 0)
-            {
-                return "rock";
-            }
-            if (hand1Choice == 1)
-            {
-                return "paper";
-            }
-            if (hand1Choice == 2)
-            {
-                return "scissors";
-            }
-            else
-            {
-                throw new Exception("Bad Human Choice");
-            }
-
-        }
     }
 }
+
