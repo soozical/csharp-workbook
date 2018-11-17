@@ -66,7 +66,7 @@ namespace TowersOfHanoi
        
        public override string ToString()
        {
-           return "Block: "+block.length;
+           return "Block: " +blocks;
        }
 
 
@@ -74,17 +74,32 @@ namespace TowersOfHanoi
 
     class Block
     {
+        
         public Block(int length)
         {
+            string myLength = length.ToString();
             this.length = length;
+
         }
 
+        public override string ToString()
+        {
+            return myLength;
+        }
+
+        public string myLength
+        {
+            get;
+            private set;
+        }
         public int length
         {
             get;
             private set;
         }
         
+    
+
 
     }
 
