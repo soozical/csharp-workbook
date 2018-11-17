@@ -9,43 +9,48 @@ namespace TowersOfHanoi
         static void Main(string[] args)
         {
             Game newGame = new Game();
+            newGame.DrawBoard();
 
         }
     }
 
     class Game
     {
-        Dictionary<char, Tower> gameMaster = new Dictionary<char, Tower>();
-        public Game ()
+        Dictionary<string, Tower> Towers = new Dictionary<string, Tower>();
+        public Game()
         {
-            /* Tower A = new Tower();
-            Tower B = new Tower();
-            Tower C = new Tower();*/
+            Tower towerA = new Tower();
+            Tower towerB = new Tower();
+            Tower towerC = new Tower();
 
-           Stack<Block> towerA = new Stack<Block>();
-           Stack<Block> towerB = new Stack<Block>();
-           Stack<Block> towerC = new Stack<Block>();
 
-           Block block1 = new Block(1);
-           Block block2 = new Block(2);
-           Block block3 = new Block(3);
-           Block block4 = new Block(4);
+            Block block1 = new Block(1);
+            Block block2 = new Block(2);
+            Block block3 = new Block(3);
+            Block block4 = new Block(4);
 
-           towerA.Push(block4);
-           towerA.Push(block3);
-           towerA.Push(block2);
-           towerA.Push(block1);
+            towerA.Add(block4);
+            towerA.Add(block3);
+            towerA.Add(block2);
+            towerA.Add(block1);
 
-            gameMaster.Add('A', towerA);
-            gameMaster.Add('B', towerB);
-            gameMaster.Add('C', towerC);
+            Towers.Add("Tower A:", towerA);
+            Towers.Add("Tower B:", towerB);
+            Towers.Add("Tower C:", towerC);
 
         }
 
-        public Dictionary<Tower, Stack> DrawBoard()
+
+        
+        public void DrawBoard()
         {
-            Console.WriteLine(gameMaster);
-            return;
+
+            foreach (KeyValuePair<string, Tower> entry in Towers)
+            {
+                Console.WriteLine("{0} {1}", entry.Key, entry.Value);
+                Console.WriteLine();
+
+            }
         }
 
     }
@@ -53,7 +58,19 @@ namespace TowersOfHanoi
     class Tower
     {
         Stack<Block> blocks = new Stack<Block>();
-    }   
+        public void Add(Block aBlock)
+        {
+            blocks.Push(aBlock);
+        }
+
+       
+       public override ToString()
+       {
+           
+       }
+
+
+    }
 
     class Block
     {
