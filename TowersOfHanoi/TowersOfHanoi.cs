@@ -64,9 +64,9 @@ namespace TowersOfHanoi
         }
 
        
-       public override ToString()
+       public override string ToString()
        {
-           
+           return "Block: "+block.length;
        }
 
 
@@ -84,6 +84,7 @@ namespace TowersOfHanoi
             get;
             private set;
         }
+        
 
     }
 
