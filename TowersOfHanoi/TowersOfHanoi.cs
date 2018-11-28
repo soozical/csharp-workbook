@@ -66,7 +66,12 @@ namespace TowersOfHanoi
        
        public override string ToString()
        {
-           return "Block: " +blocks;
+           foreach(Block Block in blocks){
+            Console.WriteLine(Block.length);
+
+           }
+           
+           
        }
 
 
@@ -74,25 +79,24 @@ namespace TowersOfHanoi
 
     class Block
     {
-        
-        public Block(int length)
+        int weight;
+        public Block(int weight)
         {
-            string myLength = length.ToString();
-            this.length = length;
-
+            string myLength = weight.ToString();
+            this.weight = weight;
         }
 
         public override string ToString()
         {
-            return myLength;
+            return myWeight;
         }
 
-        public string myLength
+        public string myWeight
         {
             get;
             private set;
         }
-        public int length
+        public int weight
         {
             get;
             private set;
