@@ -8,7 +8,9 @@ namespace TowersOfHanoi
     {
         static void Main(string[] args)
         {
+            // start a new game
             Game newGame = new Game();
+            //draw the board
             newGame.DrawBoard();
 
         }
@@ -40,13 +42,12 @@ namespace TowersOfHanoi
 
         }
 
-
-        
         public void DrawBoard()
         {
-
+            
             foreach (KeyValuePair<string, Tower> entry in Towers)
             {
+                
                 Console.WriteLine("{0} {1}", entry.Key, entry.Value);
                 Console.WriteLine();
 
@@ -63,13 +64,27 @@ namespace TowersOfHanoi
             blocks.Push(aBlock);
         }
 
+
+        public string ReverseString(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+
+            
+        }
        
        public override string ToString()
        {
-           foreach(Block Block in blocks){
-            Console.WriteLine(Block.length);
+           string weightString = " ";
 
-           }
+            foreach(Block block in blocks)
+            {
+                weightString = weightString +" "+ block.weight;
+            }
+            String reversedString = ReverseString(weightString);
+            return reversedString;
+
            
            
        }
@@ -79,23 +94,11 @@ namespace TowersOfHanoi
 
     class Block
     {
-        int weight;
         public Block(int weight)
         {
-            string myLength = weight.ToString();
             this.weight = weight;
         }
 
-        public override string ToString()
-        {
-            return myWeight;
-        }
-
-        public string myWeight
-        {
-            get;
-            private set;
-        }
         public int weight
         {
             get;
@@ -106,7 +109,6 @@ namespace TowersOfHanoi
 
 
     }
-
 
 
 }
