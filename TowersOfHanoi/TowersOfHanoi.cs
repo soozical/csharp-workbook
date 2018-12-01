@@ -54,6 +54,11 @@ namespace TowersOfHanoi
             }
         }
 
+        public string MovePiece(Tower origin, Tower destination)
+        {
+            
+        }
+
     }
 
     class Tower
