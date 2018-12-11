@@ -57,14 +57,16 @@ namespace Files
                 Console.WriteLine();
                 Console.WriteLine("Enter your guess.");
                 string guess = Console.ReadLine();
+                char[] guessArray= guess.ToCharArray();
+                char result = guessArray[0]; 
                 if (magicWord.Contains(guess))
                 {
                     Console.WriteLine("Correct!");
                     
-                    for(int i = 0; i < magicWord.Length; i++)
+                    for(int i = 0; i < letters.Length; i++)
                     {
 
-                        if(guess[i] == magicWord[i])
+                        if(result == letters[i])
                         {
                             Console.WriteLine(guess);
                         }
