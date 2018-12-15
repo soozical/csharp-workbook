@@ -43,6 +43,18 @@ namespace checkpoint3
                 string desc = Console.ReadLine();
                 brain.Add(name, desc);
             }
+            if (input == "list")
+            {
+                brain.ListTasks();
+            }
+            if(input == "delete")
+            {
+                Console.WriteLine("What is the id of the task you'd like to delete?");
+                string deleteID = Console.ReadLine();
+                int parsedID = Int32.Parse(deleteID);
+                brain.DeleteTask(parsedID);
+                
+            }
             if(input == "quit")
             {
                 Environment.Exit(0);
@@ -146,7 +158,7 @@ namespace checkpoint3
                 {
                     context.myTasks.Remove(aTask);
                 }
-                
+                Console.WriteLine("Task ID "+IDtoBeDeleted+ " deleted.");
                 context.SaveChanges();
             }
         }
