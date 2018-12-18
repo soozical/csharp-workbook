@@ -81,7 +81,12 @@ namespace checkpoint3
                 }
                 if (input == "quit")
                 {
+                    Console.WriteLine("Bye!");
                     Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry. Please try again.");
                 }
 
 
