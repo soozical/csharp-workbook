@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-
+using System.Text;
 namespace checkpoint3
 {
     //bless this mess
@@ -14,7 +14,8 @@ namespace checkpoint3
             DAO brain = new DAO();
             Console.WriteLine("Hello.");
             Console.WriteLine("Enter 'add' to add a task, 'list' to list what you have,");
-            Console.WriteLine("'delete' to delete a task and 'help' for help and 'quit' to quit.");
+            Console.WriteLine("'delete' to delete a task, 'update' to update the status,");
+            Console.WriteLine("and 'help' for help and 'quit' to quit.");
             //Initial list of tasks
             Console.WriteLine("Here are your current To Do Tasks:");
             List<Task> theList = brain.ListTasks();
@@ -45,11 +46,11 @@ namespace checkpoint3
                     Task newTask = new Task(name, desc);
                     brain.Add(newTask);
                 }
-                if (input == "list")
+                else if (input == "list")
                 {
                     brain.ListTasks();
                 }
-                /* if(input == "update")
+                else if (input == "update")
                 {
                     Console.WriteLine("What is the id of the task you'd like to update?");
                     string updateID = Console.ReadLine();
@@ -70,8 +71,11 @@ namespace checkpoint3
                     string newTitle = Console.ReadLine();
                     Console.WriteLine("What is the new description?");
                     string desc = Console.ReadLine();
-                } */
-                if (input == "delete")
+                    brain.UpdateTask(updateParsedID, newTitle, desc);
+
+
+                }
+                else if (input == "delete")
                 {
                     Console.WriteLine("What is the id of the task you'd like to delete?");
                     string deleteID = Console.ReadLine();
@@ -79,10 +83,14 @@ namespace checkpoint3
                     brain.DeleteTask(parsedID);
 
                 }
-                if (input == "quit")
+                else if (input == "quit")
                 {
                     Console.WriteLine("Bye!");
                     Environment.Exit(0);
+                }
+                else if (input == "help")
+                {
+                    ConsoleUtilities.Help();
                 }
                 else
                 {
@@ -119,38 +127,31 @@ namespace checkpoint3
         {
             this.name = name;
             this.desc = desc;
-            this.isDone = false;
-            this.symbol = symbol;
+            this.isDone = isDone;
+
         }
-        
-        
 
-        //assigned symbol to done status
-        public string Symbol(bool isDone)
-        {
-            if(isDone == true){
-            int checkID = int.Parse("0x00002713", System.Globalization.NumberStyles.HexNumber);
-            string check = char.ConvertFromUtf32(checkID);
-
-            Console.WriteLine(check); 
-            return check;           
-            }
-            else{
-            int boxID = int.Parse("0x00002610", System.Globalization.NumberStyles.HexNumber);
-            string box = char.ConvertFromUtf32(boxID);
-
-            Console.WriteLine(box);
-            return box;
-            }
-        }
 
         //Provides string representation of a Task
         override
         public String ToString()
         {
+            
+            int boxID = int.Parse("2610", System.Globalization.NumberStyles.HexNumber);
+            string box = char.ConvertFromUtf32(boxID);
+            int checkID = int.Parse("2611", System.Globalization.NumberStyles.HexNumber);
+            string check = char.ConvertFromUtf32(checkID);
+
+            string symbol = isDone ? check : box;
             return id + " | " + symbol + " | " + name + " | " + desc;
         }
+
+
+        
     }
+
+
+
 
     //Brains
     public class DAO
@@ -218,8 +219,49 @@ namespace checkpoint3
             }
         }
 
+        public void UpdateTask(int IDtoBeUpdated, string name, string desc)
+        {
+            foreach (Task aTask in context.myTasks)
+            {
+                if (aTask.id == IDtoBeUpdated)
+                {
+                    Console.WriteLine("Updated ID " + IDtoBeUpdated + ".");
+                    aTask.name = name;
+                    //aTask.isDone = isDone;
+                    aTask.desc = desc;
+                }
+            }
+            context.SaveChanges();
+        }
+
+
+    /*     public static string Symbol(bool isDone)
+        {
+            if (isDone == true)
+            {
+                int checkID = int.Parse("0x00002713", System.Globalization.NumberStyles.HexNumber);
+                string check = char.ConvertFromUtf32(checkID);
+
+                Console.WriteLine(check);
+                return check;
+            }
+            else
+            {
+                int boxID = int.Parse("0x00002610", System.Globalization.NumberStyles.HexNumber);
+                string box = char.ConvertFromUtf32(boxID);
+
+                Console.WriteLine(box);
+                return box;
+            }
+        } */
+
+        
+
     }
 
+
+
+    //I honestly don't know what I was doing here.
     /* public class TaskList : List<Task>
     {
          public override String ToString(int id, bool isDone, string name, string desc)
