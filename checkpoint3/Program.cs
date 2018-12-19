@@ -14,8 +14,8 @@ namespace checkpoint3
             DAO brain = new DAO();
             Console.WriteLine("Hello.");
             Console.WriteLine("Enter 'add' to add a task, 'list' to list what you have,");
-            Console.WriteLine("'delete' to delete a task, 'update' to update the status,");
-            Console.WriteLine("and 'help' for help and 'quit' to quit.");
+            Console.WriteLine("'delete' to delete a task, 'update' to update the task,");
+            Console.WriteLine("'status' to update done/not done, 'help' for help and 'quit' to quit.");
             //Initial list of tasks
             Console.WriteLine("Here are your current To Do Tasks:");
             List<Task> theList = brain.ListTasks();
@@ -52,6 +52,7 @@ namespace checkpoint3
                 }
                 else if (input == "update")
                 {
+                    
                     Console.WriteLine("What is the id of the task you'd like to update?");
                     string updateID = Console.ReadLine();
                     int updateParsedID = Int32.Parse(updateID);
@@ -74,6 +75,26 @@ namespace checkpoint3
                     brain.UpdateTask(updateParsedID, newTitle, desc);
 
 
+                }
+
+                else if(input == "status")
+                {
+                    
+                    Console.WriteLine("What is the id of the task you'd like to update?");
+                    string statusID = Console.ReadLine();
+                    int statusParsedID = Int32.Parse(statusID);
+                    Task updateTask = brain.GetTasks(statusID);
+                    Console.WriteLine("Is it done? (y/n)");
+                    string status = Console.ReadLine();
+                    status.ToLower();
+                    if(status == "y")
+                    {
+                        updateTask.isDone = true;
+                    } else
+                    {
+                        updateTask.isDone = false;
+                    }
+                    brain.UpdateStatus(statusParsedID);
                 }
                 else if (input == "delete")
                 {
@@ -234,6 +255,18 @@ namespace checkpoint3
             context.SaveChanges();
         }
 
+        public void UpdateStatus(int IDtoBeUpdated)
+        {
+            foreach (Task aTask in context.myTasks)
+            {
+                if (aTask.id == IDtoBeUpdated)
+                {
+                  Console.WriteLine("Status updated.");
+                }
+            }
+            context.SaveChanges();
+        }
+
 
     /*     public static string Symbol(bool isDone)
         {
@@ -306,6 +339,8 @@ namespace checkpoint3
             Console.WriteLine("add:     Add a task with a title and description.");
             Console.WriteLine("list:    List current tasks and status.");
             Console.WriteLine("delete:  Removes a task from the list.");
+            Console.WriteLine("update:  Update the info in a task.");
+            Console.WriteLine("status:  Update done status on a task");
             Console.WriteLine("get:     View a task by ID.");
             Console.WriteLine("help:    Displays this message.");
             Console.WriteLine("quit:    Exits app.");
