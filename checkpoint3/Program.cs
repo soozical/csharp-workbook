@@ -29,6 +29,7 @@ namespace checkpoint3
         {
 
             bool quit = false;
+            //bool boolStatus;
             //while we haven't exited the app...
             while (!quit)
             {
@@ -52,7 +53,7 @@ namespace checkpoint3
                 }
                 else if (input == "update")
                 {
-                    
+
                     Console.WriteLine("What is the id of the task you'd like to update?");
                     string updateID = Console.ReadLine();
                     int updateParsedID = Int32.Parse(updateID);
@@ -77,9 +78,9 @@ namespace checkpoint3
 
                 }
 
-                else if(input == "status")
+                else if (input == "status")
                 {
-                    
+
                     Console.WriteLine("What is the id of the task you'd like to update?");
                     string statusID = Console.ReadLine();
                     int statusParsedID = Int32.Parse(statusID);
@@ -87,14 +88,15 @@ namespace checkpoint3
                     Console.WriteLine("Is it done? (y/n)");
                     string status = Console.ReadLine();
                     status.ToLower();
-                    if(status == "y")
+                    if (status == "y")
                     {
                         updateTask.isDone = true;
-                    } else
+                    }
+                    else
                     {
                         updateTask.isDone = false;
                     }
-                    brain.UpdateStatus(statusParsedID);
+                    brain.UpdateStatus(statusParsedID, updateTask.isDone);
                 }
                 else if (input == "delete")
                 {
@@ -157,7 +159,7 @@ namespace checkpoint3
         override
         public String ToString()
         {
-            
+
             int boxID = int.Parse("2610", System.Globalization.NumberStyles.HexNumber);
             string box = char.ConvertFromUtf32(boxID);
             int checkID = int.Parse("2611", System.Globalization.NumberStyles.HexNumber);
@@ -168,7 +170,7 @@ namespace checkpoint3
         }
 
 
-        
+
     }
 
 
@@ -239,7 +241,7 @@ namespace checkpoint3
                 context.SaveChanges();
             }
         }
-
+        //updates task in database
         public void UpdateTask(int IDtoBeUpdated, string name, string desc)
         {
             foreach (Task aTask in context.myTasks)
@@ -255,53 +257,22 @@ namespace checkpoint3
             context.SaveChanges();
         }
 
-        public void UpdateStatus(int IDtoBeUpdated)
+        public void UpdateStatus(int IDtoBeUpdated, bool isDone)
         {
             foreach (Task aTask in context.myTasks)
             {
                 if (aTask.id == IDtoBeUpdated)
                 {
-                  Console.WriteLine("Status updated.");
+                    aTask.isDone = isDone;
+                    Console.WriteLine("Status updated.");
                 }
             }
             context.SaveChanges();
         }
 
-
-    /*     public static string Symbol(bool isDone)
-        {
-            if (isDone == true)
-            {
-                int checkID = int.Parse("0x00002713", System.Globalization.NumberStyles.HexNumber);
-                string check = char.ConvertFromUtf32(checkID);
-
-                Console.WriteLine(check);
-                return check;
-            }
-            else
-            {
-                int boxID = int.Parse("0x00002610", System.Globalization.NumberStyles.HexNumber);
-                string box = char.ConvertFromUtf32(boxID);
-
-                Console.WriteLine(box);
-                return box;
-            }
-        } */
-
-        
-
     }
 
 
-
-    //I honestly don't know what I was doing here.
-    /* public class TaskList : List<Task>
-    {
-         public override String ToString(int id, bool isDone, string name, string desc)
-        {
-            return id + " | " + isDone + " | " + name + " | " + desc;
-        }
-     }*/
 
     //set up the database/commands directly to the database
     public class Context : DbContext
